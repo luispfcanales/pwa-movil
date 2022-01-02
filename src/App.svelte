@@ -1,9 +1,8 @@
 <script>
-import OptionMenuHome from "./components/OptionMenuHome.svelte"
-import OptionMenuFavorites from "./components/OptionMenuFavorites.svelte"
-import OptionMenuSearch from "./components/OptionMenuSearch.svelte"
-import OptionMenuProfile from "./components/OptionMenuProfile.svelte"
-
+import Fa from 'svelte-fa'
+import { faHome,faSearch,faBookmark,faUser } from '@fortawesome/free-solid-svg-icons'
+import NavStore from "./store/Repository.js";
+import OptionMenu from "./components/OptionMenu.svelte"
 //card
 import Card from "./components/Card.svelte"
 //background-color:#595b83;
@@ -12,25 +11,41 @@ import Card from "./components/Card.svelte"
 <main>
   <div class="content-render">
     <div class="render">
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
+      {#if $NavStore[0]}
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+        <Card/>
+      {:else if $NavStore[1]}
+        <h1>Bookmark</h1>
+      {:else if $NavStore[2]}
+        <h1>Search</h1>
+      {:else if $NavStore[3]}
+        <h1>Profile</h1>
+      {/if}
     </div>
   </div>
   <div class="content-menu">
     <div class="content-nav">
-      <OptionMenuHome />
-      <OptionMenuFavorites />
-      <OptionMenuSearch />
-      <OptionMenuProfile/>
+      <OptionMenu buttonId={0} press={$NavStore[0]}>
+        <Fa icon={faHome} size={"3x"} color={"white"}/>
+      </OptionMenu>
+      <OptionMenu buttonId={1} press={$NavStore[1]}>
+        <Fa icon={faBookmark} size={"3x"} color={"white"}/>
+      </OptionMenu>
+      <OptionMenu buttonId={2} press={$NavStore[2]}>
+        <Fa icon={faSearch} size={"3x"} color={"white"}/>
+      </OptionMenu>
+      <OptionMenu buttonId={3} press={$NavStore[3]}>
+        <Fa icon={faUser} size={"3x"} color={"white"}/>
+      </OptionMenu>
     </div>
   </div>
 </main>
