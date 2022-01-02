@@ -18,7 +18,13 @@
     <link rel="icon" type="image/png" href="./favicon.png" />
     <link rel="stylesheet" href="./global.css" />
     <link rel="stylesheet" href="./build/bundle.css" />
-    <button id="app">install</button>
+    <div id="content-install">
+      <h3 id="text-install">Install app in phone?</h3>
+      <div id="content-btn">
+        <button id="notInstall">Ahora no!</button>
+        <button id="app">Instalar</button>
+      </div>
+    </div>
 
     <!-- You can remove this is you don't want to make your PWA installable -->
     <script
@@ -45,22 +51,61 @@
       // Initialize deferredPrompt for use later to show browser install prompt.
       let deferredPrompt;
       const btnInstall = document.getElementById('app');
-      btnInstall.style.display='none';
+      const contentInstall = document.getElementById('content-install');
+      const ctnBtn = document.getElementById('content-btn');
+      const btnCancel = document.getElementById('notInstall');
+      const txtInstall = document.getElementById('text-install');
+
+      contentInstall.style.display='none';
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
-              btnInstall.style.display = 'block';
-              btnInstall.style.width = '200px';
-              btnInstall.style.position = 'absolute';
-              btnInstall.style.border = '2px solid skyblue';
-              btnInstall.style.borderRadius = '1.5rem';
-              btnInstall.style.color = 'white';
-              btnInstall.style.backgroundColor = 'darkslateblue';
+              //content modal install
+              contentInstall.style.display = 'flex';
+              contentInstall.style.flexDirection = 'column';
+              contentInstall.style.position = 'absolute';
+              contentInstall.style.width = '97%';
+              contentInstall.style.height = '8rem';
+              contentInstall.style.backgroundColor = '#363062';
+              contentInstall.style.borderRadius = '17px';
+              contentInstall.style.top = '50%';
+              contentInstall.style.left = '50%';
+              contentInstall.style.transform = 'translate(-50%,-50%)';
+              contentInstall.style.color = 'white';
+              //text install
+              txtInstall.style.height = "30vh";
+              txtInstall.style.display = 'flex';
+              txtInstall.style.alignItems = 'center';
+              txtInstall.style.justifyContent = 'center';
+              //content buttons
+              ctnBtn.style.display = "flex";
+              ctnBtn.style.alignSelf = "flex-end";
+              ctnBtn.style.border = "1px solid orange";
+
+              btnInstall.style.width = "110px";
+              btnInstall.style.marginRight = "10px";
+              btnInstall.style.marginLeft = "10px";
+              btnInstall.style.paddingRight = "10px";
+              btnInstall.style.paddingLeft = "10px";
+              btnInstall.style.backgroundColor = "#827397";
+              btnInstall.style.color = "#ffffff";
+              btnInstall.style.borderRadius = "13px";
+              btnInstall.style.border = "2px solid #fff";
+              btnInstall.style.fontWeight = "bold";
+
+              btnCancel.style.backgroundColor = "#595b83";
+              btnCancel.style.color = "#ffffff";
+              btnCancel.style.borderRadius = "13px";
+              btnCancel.style.paddingRight = "10px";
+              btnCancel.style.paddingLeft = "10px";
       });
 
       app.addEventListener("click",()=>{
               console.log("hola")
               deferredPrompt.prompt();
+      })
+      btnCancel.addEventListener("click",()=>{
+        contentInstall.style.display='none';
       })
     </script>
   </body>

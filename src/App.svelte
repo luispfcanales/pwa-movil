@@ -2,15 +2,18 @@
 </script>
 
 <main>
-	<h1>Hello !</h1>
+	<h1>hi gopher!</h1>
 </main>
 
 <style>
+        :global(body){
+          margin:0;
+          padding:0;
+        }
 	main {
 		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+                height: 100vh;
+                background-color:#595b83;
 	}
 
 	h1 {
