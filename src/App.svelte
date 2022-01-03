@@ -3,6 +3,8 @@ import Fa from 'svelte-fa'
 import { faHome,faSearch,faBookmark,faUser } from '@fortawesome/free-solid-svg-icons'
 import NavStore from "./store/Repository.js";
 import OptionMenu from "./components/OptionMenu.svelte"
+//views render
+import Profile from "./views/Profile.svelte";
 //card
 import Card from "./components/Card.svelte"
 //background-color:#595b83;
@@ -28,7 +30,7 @@ import Card from "./components/Card.svelte"
       {:else if $NavStore[2]}
         <h1>Search</h1>
       {:else if $NavStore[3]}
-        <h1>Profile</h1>
+        <Profile/>
       {/if}
     </div>
   </div>

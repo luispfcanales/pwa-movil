@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
 
-const NavStore = writable([true,false,false,false]);
+const NavStore = writable([false,false,false,true]);
 
 export default NavStore;
