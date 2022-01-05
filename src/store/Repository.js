@@ -1,5 +1,9 @@
 import { writable } from 'svelte/store';
 
-const NavStore = writable([false,false,false,true]);
+const User = { Username: "luis", Password:"hola"};
 
-export default NavStore;
+export const NavStore = writable([false,false,false,true]);
+export const UserStore = writable(null);
+export const LoadingAnimation = writable(false);
+
+

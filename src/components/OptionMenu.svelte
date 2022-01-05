@@ -1,5 +1,5 @@
 <script>
-  import NavStore from "../store/Repository.js";
+  import { NavStore } from "../store/Repository.js";
   export let buttonId=0;
   export let press=false;
   export let size="100%";

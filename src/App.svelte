@@ -1,19 +1,29 @@
 <script>
 import Fa from 'svelte-fa'
 import { faHome,faSearch,faBookmark,faUser } from '@fortawesome/free-solid-svg-icons'
-import NavStore from "./store/Repository.js";
+//store
+import { NavStore,UserStore } from "./store/Repository.js";
 import OptionMenu from "./components/OptionMenu.svelte"
 //views render
 import Profile from "./views/Profile.svelte";
+import Login from "./views/Login.svelte";
 //card
 import Card from "./components/Card.svelte"
+import Loader from "./shared/Loader.svelte";
 //background-color:#595b83;
+
+let UserLogin;
+let Routing;
+
+UserStore.subscribe(value =>{ UserLogin = value; });
+NavStore.subscribe(value =>{ Routing = value; });
+
 </script>
 
 <main>
   <div class="content-render">
     <div class="render">
-      {#if $NavStore[0]}
+      {#if Routing[0]}
         <Card/>
         <Card/>
         <Card/>
@@ -25,31 +35,37 @@ import Card from "./components/Card.svelte"
         <Card/>
         <Card/>
         <Card/>
-      {:else if $NavStore[1]}
+      {:else if Routing[1]}
         <h1>Bookmark</h1>
-      {:else if $NavStore[2]}
+      {:else if Routing[2]}
         <h1>Search</h1>
-      {:else if $NavStore[3]}
-        <Profile/>
+      {:else if Routing[3]}
+        {#if !UserLogin  }
+          <Login/>
+        {:else}
+          <Profile/>
+        {/if}
       {/if}
     </div>
+    <Loader/>
   </div>
   <div class="content-menu">
     <div class="content-nav">
-      <OptionMenu buttonId={0} press={$NavStore[0]}>
+      <OptionMenu buttonId={0} press={Routing[0]}>
         <Fa icon={faHome} size={"3x"} color={"white"}/>
       </OptionMenu>
-      <OptionMenu buttonId={1} press={$NavStore[1]}>
+      <OptionMenu buttonId={1} press={Routing[1]}>
         <Fa icon={faBookmark} size={"3x"} color={"white"}/>
       </OptionMenu>
-      <OptionMenu buttonId={2} press={$NavStore[2]}>
+      <OptionMenu buttonId={2} press={Routing[2]}>
         <Fa icon={faSearch} size={"3x"} color={"white"}/>
       </OptionMenu>
-      <OptionMenu buttonId={3} press={$NavStore[3]}>
+      <OptionMenu buttonId={3} press={Routing[3]}>
         <Fa icon={faUser} size={"3x"} color={"white"}/>
       </OptionMenu>
     </div>
   </div>
+
 </main>
 
 <style>
@@ -60,6 +76,7 @@ import Card from "./components/Card.svelte"
 	main {
                 width:100%;
                 background-color:#f6f6f6;
+                position:relative;
 	}
         .content-render {
           width:100%;
@@ -70,6 +87,7 @@ import Card from "./components/Card.svelte"
         .render{
           display:flex;
           flex-wrap:wrap;
+          position:relative;
         }
         .content-menu{
           position:fixed;
